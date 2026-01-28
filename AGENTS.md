@@ -9,7 +9,7 @@ HSRTReport is a professional LaTeX document class for academic papers and theses
 ## Repository Structure
 
 ```
-HSRTReport-Template/
+<repo-root>/
 ├── src/                    # Document Source Code
 │   ├── Chapters/           # Chapter content files
 │   ├── HSRTReport/         # Document class (git submodule)
@@ -93,6 +93,7 @@ The HSRTReport class accepts these options in `src/Main.tex`:
 | `paper=a4` | Paper size (a4, letter, etc.) |
 | `fontsize=11pt` | Base font size (10pt, 11pt, 12pt) |
 | `oneside`/`twoside` | Single or double-sided layout |
+| `onecolumn`/`twocolumn` | Single or double column layout |
 | `DIV=14` | Type area calculation factor |
 | `variant=meti` | Report variant (meti, mki, huc) |
 | `footerlogos` | Include logos in footer |
