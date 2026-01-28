@@ -29,9 +29,18 @@ jobs:
 
       - name: Install Tectonic
         run: |
+          set -e
           # Download and install Tectonic
           curl --proto '=https' --tlsv1.2 -fsSL https://drop-sh.fullyjustified.net | sh
-          echo "$HOME/.cargo/bin" >> $GITHUB_PATH
+          # Verify tectonic was installed
+          if [ ! -f ./tectonic ]; then
+            echo "Error: tectonic binary not found after installation"
+            exit 1
+          fi
+          # Move tectonic to a directory in PATH
+          mkdir -p "$HOME/.local/bin"
+          mv ./tectonic "$HOME/.local/bin/"
+          echo "$HOME/.local/bin" >> $GITHUB_PATH
 
       - name: Install system dependencies
         run: |
@@ -143,7 +152,7 @@ jobs:
           EOF
 
       - name: Delete existing Latest release
-        uses: actions/github-script@v7
+        uses: actions/github-script@v8
         with:
           script: |
             try {
@@ -234,7 +243,7 @@ jobs:
 
       - name: Set commit status
         if: always()
-        uses: actions/github-script@v7
+        uses: actions/github-script@v8
         with:
           script: |
             const status = '${{ job.status }}' === 'success' ? 'success' : 'failure';
@@ -267,7 +276,7 @@ jobs:
 
     steps:
       - name: Comment on PR
-        uses: actions/github-script@v7
+        uses: actions/github-script@v8
         with:
           script: |
             const comment = `## ✅ LaTeX Build Successful
