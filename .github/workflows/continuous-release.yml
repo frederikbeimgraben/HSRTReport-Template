@@ -104,7 +104,7 @@ jobs:
           mkdir -p Build Output
 
           # Build with Tectonic
-          tectonic -X compile \
+          $HOME/.local/bin/tectonic -X compile \
             --keep-logs \
             --keep-intermediates \
             --outdir=Build \
