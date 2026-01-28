@@ -37,9 +37,18 @@ jobs:
 
       - name: Install Tectonic
         run: |
+          set -e
           # Download and install Tectonic
           curl --proto '=https' --tlsv1.2 -fsSL https://drop-sh.fullyjustified.net | sh
-          echo "$HOME/.cargo/bin" >> $GITHUB_PATH
+          # Verify tectonic was installed
+          if [ ! -f ./tectonic ]; then
+            echo "Error: tectonic binary not found after installation"
+            exit 1
+          fi
+          # Move tectonic to a directory in PATH
+          mkdir -p "$HOME/.local/bin"
+          mv ./tectonic "$HOME/.local/bin/"
+          echo "$HOME/.local/bin" >> $GITHUB_PATH
 
       - name: Install system dependencies
         run: |
