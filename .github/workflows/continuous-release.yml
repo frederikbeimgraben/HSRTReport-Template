@@ -31,7 +31,10 @@ jobs:
         run: |
           # Download and install Tectonic
           curl --proto '=https' --tlsv1.2 -fsSL https://drop-sh.fullyjustified.net | sh
-          echo "$HOME/.cargo/bin" >> $GITHUB_PATH
+          # Move tectonic to a directory in PATH
+          mkdir -p "$HOME/.local/bin"
+          mv ./tectonic "$HOME/.local/bin/"
+          echo "$HOME/.local/bin" >> $GITHUB_PATH
 
       - name: Install system dependencies
         run: |
